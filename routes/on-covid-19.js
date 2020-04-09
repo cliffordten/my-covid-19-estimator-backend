@@ -15,6 +15,6 @@ router.route('/json').post(getEstimationDataInJson);
 
 router.route('/xml').post(getEstimationDataInXml);
 
-router.route('/log').get(getLogData);
+router.route('/logs').get(getLogData);
 
 module.exports = router;
