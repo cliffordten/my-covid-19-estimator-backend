@@ -15,6 +15,10 @@
     "easyxml": "^2.0.1",
     "express": "^4.17.1"
   },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
@@ -24,5 +28,8 @@
     "eslint-plugin-import": "^2.20.1",
     "jest": "^25.2.0",
     "nodemon": "^2.0.3"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
