@@ -21,13 +21,17 @@ const getDays = (data) => {
 const currentInfections = (data) => {
   const currentlyInfected = data.reportedCases * 10;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
-  const severeCasesByRequestedTime = Math.trunc((15 / 100) * infectionsByRequestedTime);
+  const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
   const compute = (35 / 100) * data.totalHospitalBeds;
-  const hospitalBedsByRequestedTime = Math.trunc(compute - severeCasesByRequestedTime);
-  const casesForICUByRequestedTime = Math.trunc((5 / 100) * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTime = Math.trunc((2 / 100) * infectionsByRequestedTime);
+  const hospitalBedsByRequestedTime = Math.ceil(compute - severeCasesByRequestedTime);
+  const casesForICUByRequestedTimeR = ((5 / 100) * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTimeR = ((2 / 100) * infectionsByRequestedTime);
   const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = infectionsByRequestedTime * result * getDays(data);
+  const dollarsInFlightR = (infectionsByRequestedTime * result) / getDays(data);
+
+  const casesForICUByRequestedTime = Math.trunc(casesForICUByRequestedTimeR);
+  const casesForVentilatorsByRequestedTime = Math.trunc(casesForVentilatorsByRequestedTimeR);
+  const dollarsInFlight = Math.trunc(dollarsInFlightR);
 
   return {
     currentlyInfected,
@@ -42,13 +46,18 @@ const currentInfections = (data) => {
 const projectedInfections = (data) => {
   const currentlyInfected = data.reportedCases * 50;
   const infectionsByRequestedTime = currentlyInfected * calculatePeriod(data);
-  const severeCasesByRequestedTime = Math.trunc((15 / 100) * infectionsByRequestedTime);
+  const severeCasesByRequestedTime = (15 / 100) * infectionsByRequestedTime;
   const compute = (35 / 100) * data.totalHospitalBeds;
-  const hospitalBedsByRequestedTime = Math.trunc(compute - severeCasesByRequestedTime);
-  const casesForICUByRequestedTime = Math.trunc((5 / 100) * infectionsByRequestedTime);
-  const casesForVentilatorsByRequestedTime = Math.trunc((2 / 100) * infectionsByRequestedTime);
+  const hospitalBedsByRequestedTime = Math.ceil(compute - severeCasesByRequestedTime);
+  const casesForICUByRequestedTimeR = ((5 / 100) * infectionsByRequestedTime);
+  const casesForVentilatorsByRequestedTimeR = ((2 / 100) * infectionsByRequestedTime);
   const result = data.region.avgDailyIncomeInUSD * data.region.avgDailyIncomePopulation;
-  const dollarsInFlight = infectionsByRequestedTime * result * getDays(data);
+  const dollarsInFlightR = (infectionsByRequestedTime * result) / getDays(data);
+
+
+  const casesForICUByRequestedTime = Math.trunc(casesForICUByRequestedTimeR);
+  const casesForVentilatorsByRequestedTime = Math.trunc(casesForVentilatorsByRequestedTimeR);
+  const dollarsInFlight = Math.trunc(dollarsInFlightR);
 
   return {
     currentlyInfected,

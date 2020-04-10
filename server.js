@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
+// const morgan = require('morgan');
 const dotenv = require('dotenv');
 const fileManager = require('./file-manager');
 
@@ -13,6 +14,8 @@ dotenv.config({ path: 'config/config.env' });
 const app = express();
 
 app.use(express.json());
+
+// app.use(morgan('dev'));
 
 app.use(logger);
 
