@@ -1,2 +1,0 @@
-POST		/api/v1/on-covid-19/json		200		46846 ms
-POST		/api/v1/on-covid-19/xml		200		61129 ms

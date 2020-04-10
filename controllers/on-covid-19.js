@@ -11,61 +11,49 @@ const serializer = new EasyXml({
   manifest: true,
 });
 
-const dataInput = {
-  region: {
-    name: "Africa",
-    avgAge: 19.7,
-    avgDailyIncomeInUSD: 5,
-    avgDailyIncomePopulation: 0.71,
-  },
-  periodType: "days",
-  timeToElapse: 58,
-  reportedCases: 674,
-  population: 66622705,
-  totalHospitalBeds: 1380614,
-};
+// const dataInput = {
+//   region: {
+//     name: "Africa",
+//     avgAge: 19.7,
+//     avgDailyIncomeInUSD: 5,
+//     avgDailyIncomePopulation: 0.71,
+//   },
+//   periodType: "days",
+//   timeToElapse: 58,
+//   reportedCases: 674,
+//   population: 66622705,
+//   totalHospitalBeds: 1380614,
+// };
 
 // const dataInput = JSON.parse(dataInputs);
 
 const estimator = require("../estimator");
 
 exports.getEstimationData = (req, res) => {
-  const { data } = req.body;
+  const  data  = req.body;
   let estimatorData;
 
+  estimatorData = estimator(data);
 
-  if (data) {
-    estimatorData = estimator(data);
-
-  } else {
-    estimatorData = estimator(dataInput);
-  }
   res.status(200).json({ success: true, estimatorData });
 };
 
 exports.getEstimationDataInJson = (req, res) => {
-  const { data } = req.body;
+  const  data  = req.body;
   let estimatorData;
 
-  if (!data) {
-    estimatorData = estimator(dataInput);
-  } else {
-    estimatorData = estimator(data);
-  }
+  estimatorData = estimator(data);
+
   res.status(200).json({ success: true, estimatorData });
 };
 
 exports.getEstimationDataInXml = (req, res) => {
   res.set("Content-Type", "text/xml");
 
-  const { data } = req.body;
+  const  data  = req.body;
   let estimatorData;
 
-  if (!data) {
-    estimatorData = estimator(dataInput);
-  } else {
-    estimatorData = estimator(data);
-  }
+  estimatorData = estimator(data);
 
   res.status(200).send(serializer.render({ success: true, estimatorData }));
 };
