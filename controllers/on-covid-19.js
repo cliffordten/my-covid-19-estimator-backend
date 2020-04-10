@@ -50,7 +50,7 @@ exports.getEstimationDataInJson = (req, res) => {
 };
 
 exports.getEstimationDataInXml = (req, res) => {
-  res.set("Content-Type", "text/xml");
+  res.set({ 'content-type': 'application/xml; charset=utf-8' });
 
   const  dataR  = req.body;
   let estimatorDataR;
@@ -62,7 +62,7 @@ exports.getEstimationDataInXml = (req, res) => {
 };
 
 exports.getLogData = (req, res) => {
-  res.set("Content-Type", "text/text");
+  res.set({ 'content-type': 'application/plain; charset=utf-8' });
 
   const logData = fs.readFileSync(filePath, "utf8");
 
