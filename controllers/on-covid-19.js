@@ -30,6 +30,8 @@ const serializer = new EasyXml({
 const estimator = require("../estimator");
 
 exports.getEstimationData = (req, res) => {
+  res.set({ 'content-type': 'application/json' });
+  
   const  dataR  = req.body;
   let estimatorDataR;
 
@@ -40,6 +42,8 @@ exports.getEstimationData = (req, res) => {
 };
 
 exports.getEstimationDataInJson = (req, res) => {
+  res.set({ 'content-type': 'application/json' });
+
   const  dataR  = req.body;
   let estimatorDataR;
 
@@ -62,7 +66,7 @@ exports.getEstimationDataInXml = (req, res) => {
 };
 
 exports.getLogData = (req, res) => {
-  res.set({ 'content-type': 'application/plain; charset=utf-8' });
+  res.set({ 'content-type': 'text/plain; charset=utf-8' });
 
   const logData = fs.readFileSync(filePath, "utf8");
 
