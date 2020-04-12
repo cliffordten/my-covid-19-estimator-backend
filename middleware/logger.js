@@ -10,10 +10,15 @@ const logger = (req, res, next) => {
   // const data = `${Date.now()}\t\t${str.substr(8)}\t\tdone in ${
   //   seconds.toFixed(2)
   // } seconds`;
+  
+  const timeInmilsec = Math.trunc(new Date() - start);
+  let timeRequired = timeInmilsec.toString();
 
-  const str = Math.trunc(new Date() - start)
+  if(timeInmilsec < 10){
+    timeRequired = timeInmilsec.toString().padStart(2, '0')
+  }
 
-  const data = `${req.method}\t\t${req.url}\t\t${res.statusCode}\t\t${str}ms`;
+  const data = `${req.method}\t\t${req.url}\t\t${res.statusCode}\t\t${timeRequired}ms`;
 
 
   fs.appendFile('middleware/on-covid-19.log.txt', `${data}\n`, () => {});
